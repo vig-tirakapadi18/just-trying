@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import OAuth from "../components/OAuth";
 import {
   getAuth,
@@ -9,29 +9,42 @@ import {
 } from "firebase/auth";
 import { db } from "../firebase";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
-import { toast } from "react-toastify";
 
 const SignUp = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormdata] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const navigator = useNavigate();
+  const { name, email, password } = formData;
 
   const nameChangeHandler = (event) => {
     const enteredName = event.target.value;
-    setName(enteredName);
+    setFormdata((prevState) => ({
+      ...prevState,
+      [event.target.id]: enteredName,
+    }));
   };
 
   const emailChangeHandler = (event) => {
     const enteredEmail = event.target.value;
-    setEmail(enteredEmail);
+    setFormdata((prevState) => ({
+      ...prevState,
+      [event.target.id]: enteredEmail,
+    }));
   };
 
   const passwordChangeHandler = (event) => {
     const enteredPassword = event.target.value;
-    setPassword(enteredPassword);
+    setFormdata((prevState) => ({
+      ...prevState,
+      [event.target.id]: enteredPassword,
+    }));
   };
 
   const submitHandler = async (event) => {
@@ -50,14 +63,12 @@ const SignUp = () => {
       });
 
       const user = userCredential.user;
-      const formData = { name, email };
-      formData.timestamp = serverTimestamp();
-      delete formData.password;
-      await setDoc(doc(db, "users", user.uid), formData);
-      // toast.success("Successfully signed up!");
-      navigator("/");
+      const formDataCopy = { ...formData };
+      formDataCopy.timestamp = serverTimestamp();
+      delete formDataCopy.password;
+      await setDoc(doc(db, "users", user.uid), formDataCopy);
     } catch (error) {
-      toast.error("Please fill all the fields!");
+      console.log(error);
     }
   };
 
