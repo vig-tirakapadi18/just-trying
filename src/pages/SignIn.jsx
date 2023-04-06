@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
+import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  const navigator = useNavigate();
 
   const emailChangeHandler = (event) => {
     const enteredEmail = event.target.value;
@@ -18,6 +22,25 @@ const SignIn = () => {
     const enteredPassword = event.target.value;
     console.log(enteredPassword);
     setPassword(enteredPassword);
+  };
+
+  const submitHandler = async (event) => {
+    event.preventDefault();
+
+    try {
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      if (userCredential.user) {
+        navigator("/");
+      }
+    } catch (error) {
+      toast.error("Please enter proper credentials!");
+    }
   };
 
   return (
@@ -32,7 +55,7 @@ const SignIn = () => {
           />
         </div>
         <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
-          <form>
+          <form onSubmit={submitHandler}>
             <input
               className="mb-6 w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out"
               type="email"
