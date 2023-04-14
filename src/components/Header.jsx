@@ -21,6 +21,7 @@ const Header = () => {
 
   const pathMatchRoute = (route) => {
     if (route === location.pathname) {
+      console.log(route, location.pathname);
       return true;
     }
   };
@@ -31,18 +32,6 @@ const Header = () => {
         className="flex justify-between items-center px-3
        max-w-6xl mx-auto
        ">
-        {/* <div>
-          <span
-            className="font-bold text-2xl text-lime-700 cursor-pointer"
-            onClick={() => navigator("/")}>
-            Biblio
-          </span>
-          <span
-            className="font-bold text-2xl text-red-700 cursor-pointer"
-            onClick={() => navigator("/")}>
-            phile!
-          </span>
-        </div> */}
         <div>
           <img
             src="https://static.rdc.moveaws.com/images/logos/rdc-logo-default.svg"
