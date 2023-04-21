@@ -8,3 +8,12 @@ body {
   background-color: rgb(240, 253, 244);
   font-family: "Montserrat", sans-serif;
 }
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  color: #a8dadc;
+}
+
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+  background: #a8dadc !important;
+}
