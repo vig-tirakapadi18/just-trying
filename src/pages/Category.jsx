@@ -12,11 +12,13 @@ import {
 import { db } from "../firebase";
 import Spinner from "../components/Spinner";
 import ListingItem from "../components/ListingItem";
+import { useParams } from "react-router-dom";
 
-const Offers = () => {
+const Category = () => {
   const [listings, setListings] = useState(null);
   const [loading, setLoading] = useState(true);
   const [lastFetchedListing, setLastFetchedListing] = useState(null);
+  const params = useParams();
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -24,7 +26,7 @@ const Offers = () => {
         const listingRef = collection(db, "listings");
         const q = query(
           listingRef,
-          where("offer", "==", true),
+          where("type", "==", params.categoryName),
           orderBy("timestamp", "desc"),
           limit(8)
         );
@@ -40,23 +42,22 @@ const Offers = () => {
         });
         setListings(listings);
         setLoading(false);
-        fetchListings();
       } catch (error) {
         toast.error("Could not fetch list.");
       }
     };
     fetchListings();
-  }, []);
+  }, [params.categoryName]);
 
   const onfetchMoreListings = async () => {
     try {
       const listingRef = collection(db, "listings");
       const q = query(
         listingRef,
-        where("offer", "==", true),
+        where("type", "==", params.categoryName),
         orderBy("timestamp", "desc"),
         limit(4),
-        startAfter((prevState) => [...prevState, ...listings])
+        startAfter(lastFetchedListing)
       );
       const querySnap = await getDocs(q);
       const lastVisible = querySnap.docs[querySnap.docs.length - 1];
@@ -68,16 +69,18 @@ const Offers = () => {
           data: doc.data(),
         });
       });
-      setListings(listings);
+      setListings((prevState) => [...prevState, ...listings]);
       setLoading(false);
     } catch (error) {
-      toast.error("Could not fetch list.");
+      toast.error("Could not fetch listing.");
     }
   };
 
   return (
     <div className="max-w-6xl mx-auto px-3">
-      <h1 className="text-3xl text-center mt-6 font-bold mb-6">Offers</h1>
+      <h1 className="text-3xl text-center mt-6 font-bold mb-6">
+        {params.categoryName === "rent" ? "Places for rent" : "Places for sale"}
+      </h1>
       {loading ? (
         <Spinner />
       ) : listings && listings.length > 0 ? (
@@ -104,10 +107,15 @@ const Offers = () => {
           )}
         </>
       ) : (
-        <p>There are no current offers</p>
+        <p>
+          There are no current{" "}
+          {params.categoryName === "rent"
+            ? "Places for Rent"
+            : "Places for Sale"}
+        </p>
       )}
     </div>
   );
 };
 
-export default Offers;
+export default Category;

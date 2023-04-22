@@ -43,6 +43,7 @@ const Slider = () => {
   if (listings.length === 0) {
     return <></>;
   }
+
   return (
     listings && (
       <>
@@ -59,7 +60,7 @@ const Slider = () => {
               onClick={() => navigator(`/category/${data.type}/${id}`)}>
               <div
                 style={{
-                  backgroundImage: `url(${data.imgUrls[0]}) center, no-repeat`,
+                  background: `url(${data.imgUrls[0]}) center, no-repeat`,
                   backgroundSize: "cover",
                 }}
                 className=" relative w-full h-[300px] overflow-hidden"></div>

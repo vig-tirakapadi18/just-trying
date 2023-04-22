@@ -43,13 +43,13 @@ const ListingItem = ({ listing, id, onDelete, onEdit }) => {
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             {listing.type === "rent" && " / month"}
           </p>
-          <div className="flex items-center mt-10 space-x-3">
+          <div className="flex items-center  mt-[10px] space-x-3">
             <div className="flex items-center space-x-1">
               <p className="font-bold text-xs">
                 {listing.bedrooms > 1 ? `${listing.bedrooms} Beds` : "1 Bed"}
               </p>
             </div>
-            <div className="flex items-center mt-10 space-x-3">
+            <div className="flex items-center space-x-1">
               <p className="font-bold text-xs">
                 {listing.bathrooms > 1
                   ? `${listing.bathrooms} Baths`
