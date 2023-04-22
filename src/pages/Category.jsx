@@ -72,7 +72,7 @@ const Category = () => {
       setListings((prevState) => [...prevState, ...listings]);
       setLoading(false);
     } catch (error) {
-      toast.error("Could not fetch listing.");
+      toast.error("Could not fetch list.");
     }
   };
 
