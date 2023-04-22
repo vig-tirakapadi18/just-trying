@@ -206,7 +206,7 @@ const CreateListing = () => {
     <main className="max-w-md px-2 mx-auto">
       <h1 className="text-3xl text-center mt-6 font-bold">Edit a Listing</h1>
       <form onSubmit={onSubmit}>
-        <p className="text-lg mt-6 font-semibold">Sell / Rent</p>
+        <p className="text-lg mt-6 font-semibold">Sale / Rent</p>
         <div className="flex">
           <button
             type="button"
@@ -218,7 +218,7 @@ const CreateListing = () => {
                 ? "bg-white text-black"
                 : "bg-slate-600 text-white"
             }`}>
-            sell
+            Sale
           </button>
           <button
             type="button"
@@ -408,7 +408,7 @@ const CreateListing = () => {
               />
               {type === "rent" && (
                 <div className="">
-                  <p className="text-md w-full whitespace-nowrap">$ / Month</p>
+                  <p className="text-md w-full whitespace-nowrap">Rs / Month</p>
                 </div>
               )}
             </div>
@@ -432,7 +432,7 @@ const CreateListing = () => {
                 {type === "rent" && (
                   <div className="">
                     <p className="text-md w-full whitespace-nowrap">
-                      $ / Month
+                      Rs / Month
                     </p>
                   </div>
                 )}

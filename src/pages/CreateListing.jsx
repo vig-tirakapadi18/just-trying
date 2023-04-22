@@ -186,7 +186,7 @@ const CreateListing = () => {
                 ? "bg-white text-black"
                 : "bg-slate-600 text-white"
             }`}>
-            sell
+            Sale
           </button>
           <button
             type="button"
@@ -376,7 +376,7 @@ const CreateListing = () => {
               />
               {type === "rent" && (
                 <div className="">
-                  <p className="text-md w-full whitespace-nowrap">$ / Month</p>
+                  <p className="text-md w-full whitespace-nowrap">Rs / Month</p>
                 </div>
               )}
             </div>
@@ -400,7 +400,7 @@ const CreateListing = () => {
                 {type === "rent" && (
                   <div className="">
                     <p className="text-md w-full whitespace-nowrap">
-                      $ / Month
+                      Rs / Month
                     </p>
                   </div>
                 )}

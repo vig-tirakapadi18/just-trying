@@ -54,7 +54,6 @@ const SignUp = () => {
       formData.timestamp = serverTimestamp();
       delete formData.password;
       await setDoc(doc(db, "users", user.uid), formData);
-      // toast.success("Successfully signed up!");
       navigator("/");
     } catch (error) {
       toast.error("Please fill all the fields!");
