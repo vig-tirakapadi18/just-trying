@@ -174,7 +174,7 @@ const CreateListing = () => {
     <main className="max-w-md px-2 mx-auto">
       <h1 className="text-3xl text-center mt-6 font-bold">Create a Listing</h1>
       <form onSubmit={onSubmit}>
-        <p className="text-lg mt-6 font-semibold">Sell / Rent</p>
+        <p className="text-lg mt-6 font-semibold">Sale / Rent</p>
         <div className="flex">
           <button
             type="button"

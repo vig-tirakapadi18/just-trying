@@ -147,7 +147,7 @@ const Profile = () => {
               to="/create-listing"
               className="flex justify-center items-center">
               <FcHome className="p1 mr-2 text-3xl rounded-full bg-red-200 border-2" />
-              Sell or rent your home
+              Sale or rent your home
             </Link>
           </button>
         </div>
